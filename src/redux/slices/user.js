@@ -10,17 +10,16 @@ export const loginApi = createAsyncThunk(
     'loginAction',
     async ({ username, password }) => {
         const response = await axios.post(endpoint + '/auth/local', { identifier: username, password: password });
-        console.log('RESPONSE LOGIN: ', response);
-        if (response.status === 200)
+        if (response.status === 200) {
+            localStorage.setItem('jwt', JSON.stringify(response.data.jwt));
             return {
                 logged: true,
                 jwt: response.data.jwt,
                 ...response.data.user
             }
+        }
         else
-            return {
-                logged: false
-            }
+            return initialState;
     }
 )
 

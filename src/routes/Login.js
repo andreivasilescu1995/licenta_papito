@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -11,14 +10,12 @@ import { loginApi } from "../redux/slices/user";
 
 export default function Login() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const login = () => {
         dispatch(loginApi({ username, password }));
-        // navigate("/");
     };
 
     return (
