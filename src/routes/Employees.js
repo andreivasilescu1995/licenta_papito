@@ -73,7 +73,7 @@ export default function Employees() {
         dispatch(showModalAdd({ showModalAdd: true }));
     }
 
-    const refreshTable = () => {
+    const onAddedSuccessfully = () => {
         setForceRefresh(new Date());
     }
 
@@ -92,7 +92,7 @@ export default function Employees() {
             <div style={{ height: 400 }}>
                 <DataGrid
                     key={forceRefresh}
-                    rows={employees}
+                    rows={employees ? employees : []}
                     columns={columns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
@@ -105,7 +105,7 @@ export default function Employees() {
                 />
             </div>
 
-            <ModalAdd entityName="employee" fields={['name', 'department', 'hired_at']} refreshTable={refreshTable} />
+            <ModalAdd entityName="employee" fields={['name', 'department', 'hired_at']} onAddedSuccessfully={onAddedSuccessfully} />
         </>
     )
 }

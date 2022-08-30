@@ -226,6 +226,7 @@ function Layout({ children }) {
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 2.5,
                                 }}
+                                onClick={() => navigate('/' + text)}
                             >
                                 <ListItemIcon
                                     sx={{

@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
 import { showModalAdd } from '../redux/slices/modals';
 import { addEmployeeAction } from '../redux/slices/employees';
+import { addEvent } from '../redux/slices/calendar';
 
 const style = {
     position: 'absolute',
@@ -23,21 +24,26 @@ const style = {
     p: 4,
 };
 
-export default function ModalAdd({ fields, entityName, refreshTable }) {
+export default function ModalAdd({ fields, entityName, propsValues, onAddedSuccessfully }) {
     const dispatch = useDispatch();
     const open = useSelector(state => state.modals.showModalAdd);
 
     const [values, setValues] = useState({});
 
     useEffect(() => {
+        const newValues = { ...values };
         if (fields && fields.length) {
-            const newValues = {};
             fields.forEach(field => {
                 newValues[field] = ''
             });
-            setValues(newValues);
         }
-    }, [fields]);
+        if (propsValues) {
+            Object.keys(propsValues).map(key => { //eslint-disable-line
+                newValues[key] = propsValues[key];
+            });
+        }
+        setValues(newValues);
+    }, [fields, propsValues]); //eslint-disable-line
 
     const handleClose = () => {
         dispatch(showModalAdd({ showModalAdd: false }));
@@ -52,10 +58,13 @@ export default function ModalAdd({ fields, entityName, refreshTable }) {
     const onAddClick = () => {
         if (entityName === 'employee')
             dispatch(addEmployeeAction(values));
-        //else if pentru fiecare entitate care se adauga
+        else if (entityName === 'event') {
+            dispatch(addEvent(values));
+        }
+        //else if pentru fiecare entitate care foloseste modalul
 
         handleClose();
-        refreshTable();
+        if (onAddedSuccessfully) onAddedSuccessfully();
     }
 
     return (
@@ -75,9 +84,10 @@ export default function ModalAdd({ fields, entityName, refreshTable }) {
                         </Typography>
                         {fields &&
                             <Box display="flex" flexDirection="column">
-                                {fields.map(field => {
+                                {fields.map((field, index) => {
                                     return (
                                         <TextField
+                                            key={'field' + index}
                                             id={"add" + field}
                                             label={field}
                                             variant="standard"

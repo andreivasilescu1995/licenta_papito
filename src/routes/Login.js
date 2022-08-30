@@ -29,11 +29,11 @@ export default function Login() {
         }}>
             <Paper id="paper-blur" sx={{ minWidth: 300 }}>
                 <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
-                    <AccountCircleIcon co l or="red" sx={{ width: '100px', height: '100px' }} style={{ margin: 10 }} />
+                    <AccountCircleIcon sx={{ width: '100px', height: '100px' }} style={{ margin: 10 }} />
                     <form>
                         <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
-                            <input className="login-input" type="text" defaultValue="admin" value={username} onChange={e => setUsername(e.target.value)} />
-                            <input className="login-input" type="password" defaultValue="12345678" value={password} onChange={e => setPassword(e.target.value)} />
+                            <input className="login-input" type="text" value={username} onChange={e => setUsername(e.target.value)} />
+                            <input className="login-input" type="password" value={password} onChange={e => setPassword(e.target.value)} />
                         </Box>
                     </form>
                     <Stack direction="column" width="100%" alignItems="center">

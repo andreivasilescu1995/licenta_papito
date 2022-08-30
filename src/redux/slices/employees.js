@@ -2,9 +2,7 @@ import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { endpoint } from '../../constants';
 
-const initialState = {
-    employees: null
-}
+const initialState = null;
 
 export const getAllEmployees = createAsyncThunk(
     'getAllEmployeesAction',

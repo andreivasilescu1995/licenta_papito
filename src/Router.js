@@ -9,6 +9,7 @@ import LayoutRoute from "./components/Layout";
 import Dashboard from './routes/Dashboard';
 import Login from "./routes/Login";
 import Employees from "./routes/Employees";
+import Calendar from "./routes/Calendar";
 
 export default function Router() {
     const user = useSelector((state) => state.user);
@@ -21,6 +22,7 @@ export default function Router() {
                         <Route path="/" element={<LayoutRoute><Dashboard /></LayoutRoute>} />
                         <Route path="/Dashboard" element={<LayoutRoute><Dashboard /></LayoutRoute>} />
                         <Route path="/Employees" element={<LayoutRoute><Employees /></LayoutRoute>} />
+                        <Route path="/Calendar" element={<LayoutRoute><Calendar /></LayoutRoute>} />
                         <Route path="/*" element={<LayoutRoute><Dashboard /></LayoutRoute>} />
                     </>
                     :

@@ -11,7 +11,6 @@ export const snackbarSlice = createSlice({
     initialState,
     reducers: {
         show: (state, action) => {
-            // console.log('PAYLOAD: ', action);
             const { show, message, type } = action.payload;
             state.show = show;
             state.message = message;
