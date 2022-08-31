@@ -4,9 +4,9 @@ import { endpoint } from "../../constants";
 
 const initialState = null;
 
-export const getAllEmployees = createAsyncThunk("getAllEmployeesAction", async () => {
+export const getAllClients = createAsyncThunk("getAllClientsAction", async () => {
   const jwt = localStorage.getItem("jwt");
-  const response = await axios.get(endpoint + "/employees", {
+  const response = await axios.get(endpoint + "/clients", {
     headers: {
       Authorization: `Bearer ${jwt.replace(/["]/g, "")}`,
     },
@@ -20,21 +20,23 @@ export const getAllEmployees = createAsyncThunk("getAllEmployeesAction", async (
     });
 });
 
-export const deleteEmployee = createAsyncThunk("deleteEmployee", async (id) => {
+export const deleteClient = createAsyncThunk("deleteClient", async (id) => {
   const jwt = localStorage.getItem("jwt");
-  await axios.delete(endpoint + "/employees/" + id, {
+  await axios.delete(endpoint + "/clients/" + id, {
     headers: {
       Authorization: `Bearer ${jwt.replace(/["]/g, "")}`,
     },
   });
 });
 
-export const addEmployeeAction = createAsyncThunk("addEmployee", async (employee) => {
+export const addClientAction = createAsyncThunk("addClient", async (client) => {
   const jwt = localStorage.getItem("jwt");
+  console.log(jwt);
+
   const response = await axios.post(
-    endpoint + "/employees/",
+    endpoint + "/clients/",
     {
-      data: employee,
+      data: client,
     },
     {
       headers: {
@@ -42,26 +44,26 @@ export const addEmployeeAction = createAsyncThunk("addEmployee", async (employee
       },
     }
   );
-  return { employee, id: response.data.data.id };
+  return { client, id: response.data.data.id };
 });
 
-export const employeesSlice = createSlice({
-  name: "employees",
+export const clientsSlice = createSlice({
+  name: "clients",
   initialState,
   reducers: {
-    setEmployees: (state, action) => {
+    setClients: (state, action) => {
       return action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getAllEmployees.fulfilled, (state, action) => {
+      .addCase(getAllClients.fulfilled, (state, action) => {
         return (state = action.payload);
       })
-      .addCase(addEmployeeAction.fulfilled, (state, action) => {
-        state.push({ ...action.payload.employee, id: action.payload.id });
+      .addCase(addClientAction.fulfilled, (state, action) => {
+        state.push({ ...action.payload.client, id: action.payload.id });
       });
   },
 });
 
-export const { setEmployees } = employeesSlice.actions;
+export const { setClients } = clientsSlice.actions;
