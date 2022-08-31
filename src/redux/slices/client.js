@@ -31,8 +31,6 @@ export const deleteClient = createAsyncThunk("deleteClient", async (id) => {
 
 export const addClientAction = createAsyncThunk("addClient", async (client) => {
   const jwt = localStorage.getItem("jwt");
-  console.log(jwt);
-
   const response = await axios.post(
     endpoint + "/clients/",
     {

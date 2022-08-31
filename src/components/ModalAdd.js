@@ -59,8 +59,6 @@ export default function ModalAdd({ fields, entityName, propsValues, onAddedSucce
   };
 
   const onAddClick = () => {
-    console.log(entityName);
-
     if (entityName === "employee") dispatch(addEmployeeAction(values));
     else if (entityName === "event") {
       dispatch(addEvent(values));
