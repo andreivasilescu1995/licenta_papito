@@ -80,7 +80,7 @@ export default function LineChart(props) {
             padding: [8, 12, 8, 12],
             extraCssText: "border-radius:7px",
             borderColor: "rgba(0,0,0,0.8)",
-            formatter: (props) => props[0].value + ' clients'
+            formatter: (parameters) => parameters[0].value + props.entity
         }
     };
 

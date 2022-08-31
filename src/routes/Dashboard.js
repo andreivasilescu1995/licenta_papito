@@ -19,10 +19,10 @@ export default function Dashboard() {
     return (
         <Box sx={{ flexGrow: 1, p: 3 }}>
             Clients chart
-            <LineChart data={clients} />
+            <LineChart data={clients} entity="clients" />
 
             Employees chart
-            <LineChart data={employees} />
+            <LineChart data={employees} entity="employees" />
         </Box>
     );
 }
