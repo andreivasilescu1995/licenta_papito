@@ -40,8 +40,7 @@ export default function ModalAdd({ fields, entityName, propsValues, onAddedSucce
       });
     }
     if (propsValues) {
-      Object.keys(propsValues).map((key) => {
-        //eslint-disable-line
+      Object.keys(propsValues).map((key) => { //eslint-disable-line
         newValues[key] = propsValues[key];
       });
     }
